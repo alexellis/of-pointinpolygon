@@ -1,10 +1,9 @@
 package function
 
 import (
-	"fmt"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"encoding/json"
 )
 
 type Location struct {

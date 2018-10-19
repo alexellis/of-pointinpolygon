@@ -7,5 +7,5 @@ functions:
     lang: golang-middleware
     handler: ./pointinpolygon
     image: michaelvlaar/pointinpolygon:latest
-    environment: 
+    environment:
       content_type: application/json
