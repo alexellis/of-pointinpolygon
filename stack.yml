@@ -4,6 +4,8 @@ provider:
 
 functions:
   pointinpolygon:
-    lang: go
+    lang: golang-middleware
     handler: ./pointinpolygon
     image: michaelvlaar/pointinpolygon:latest
+    environment: 
+      content_type: application/json
