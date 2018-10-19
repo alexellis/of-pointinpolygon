@@ -1,22 +1,22 @@
 package function
 
 import (
-		"encoding/json"
+	"encoding/json"
 )
 
 const (
-	Inside = "inside"
+	Inside  = "inside"
 	Outside = "outside"
-	Error = "error"
+	Error   = "error"
 )
 
 type Location struct {
-	Latitude float32 `json:"latitude"`
+	Latitude  float32 `json:"latitude"`
 	Longitude float32 `json:"longitude"`
 }
 
 type Request struct {
-	Point *Location `json:"point"`
+	Point   *Location   `json:"point"`
 	Polygon []*Location `json:"polygon"`
 }
 
@@ -29,8 +29,8 @@ func Handle(req []byte) string {
 	}
 
 	inside := false
-	for i, j := 0, len(request.Polygon) - 1; i < len(request.Polygon); i = i + 1 {
-		if (((request.Polygon[i].Latitude <= request.Point.Latitude) && (request.Point.Latitude < request.Polygon[j].Latitude)) || ((request.Polygon[j].Latitude <= request.Point.Latitude) && (request.Point.Latitude < request.Polygon[i].Latitude))) && (request.Point.Longitude < (request.Polygon[j].Longitude - request.Polygon[i].Longitude) * (request.Point.Latitude - request.Polygon[i].Latitude) / (request.Polygon[j].Latitude - request.Polygon[i].Latitude) + request.Polygon[i].Longitude) {
+	for i, j := 0, len(request.Polygon)-1; i < len(request.Polygon); i = i + 1 {
+		if (((request.Polygon[i].Latitude <= request.Point.Latitude) && (request.Point.Latitude < request.Polygon[j].Latitude)) || ((request.Polygon[j].Latitude <= request.Point.Latitude) && (request.Point.Latitude < request.Polygon[i].Latitude))) && (request.Point.Longitude < (request.Polygon[j].Longitude-request.Polygon[i].Longitude)*(request.Point.Latitude-request.Polygon[i].Latitude)/(request.Polygon[j].Latitude-request.Polygon[i].Latitude)+request.Polygon[i].Longitude) {
 			inside = !inside
 		}
 		j = i
